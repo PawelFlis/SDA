@@ -24,7 +24,7 @@ INSERT INTO country (name, continent_id) VALUES('Argentyna',(SELECT id FROM cont
 INSERT INTO country (name, continent_id) VALUES('Brazylia',(SELECT id FROM continent WHERE name='Ameryka'));
 
 INSERT INTO city (name, country_id) VALUES('Katowice',(SELECT id FROM country WHERE name='Polska'));
-INSERT INTO city (name, country_id) VALUES('Kraków',(SELECT id FROM country WHERE name='Polska'));
+/*INSERT INTO city (name, country_id) VALUES('Kraków',(SELECT id FROM country WHERE name='Polska'));
 INSERT INTO city (name, country_id) VALUES('Warszawa',(SELECT id FROM country WHERE name='Polska'));
 INSERT INTO city (name, country_id) VALUES('Wrocław',(SELECT id FROM country WHERE name='Polska'));
 INSERT INTO city (name, country_id) VALUES('Gdańsk',(SELECT id FROM country WHERE name='Polska'));
@@ -47,7 +47,7 @@ INSERT INTO city (name, country_id) VALUES('Larisa',(SELECT id FROM country WHER
 INSERT INTO city (name, country_id) VALUES('Saloniki',(SELECT id FROM country WHERE name='Grecja'));
 INSERT INTO city (name, country_id) VALUES('Praga',(SELECT id FROM country WHERE name='Czechy'));
 INSERT INTO city (name, country_id) VALUES('Londyn',(SELECT id FROM country WHERE name='Anglia'));
-INSERT INTO city (name, country_id) VALUES('Sofia',(SELECT id FROM country WHERE name='Bułgaria'));
+INSERT INTO city (name, country_id) VALUES('Sofia',(SELECT id FROM country WHERE name='Bułgaria'));*/
 INSERT INTO city (name, country_id) VALUES('Kair',(SELECT id FROM country WHERE name='Egipt'));
 
 INSERT INTO city (name, country_id) VALUES('Nowy Jork',(SELECT id FROM country WHERE name='USA'));

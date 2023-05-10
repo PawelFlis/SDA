@@ -2,7 +2,9 @@ package com.example.SDA.model;
 
 import com.example.SDA.model.enums.TourType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +49,8 @@ public class Tour {
     @Column(name="is_special")
     private boolean isSpecial;
 
-    @OneToMany( mappedBy = "tour")
-    private Set<Order> Orders =new HashSet<>();
+/*    @OneToMany( mappedBy = "tour")
+    private Set<Order> orders =new HashSet<>();*/
 
     @ManyToOne
     private Hotel hotel;
