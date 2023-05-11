@@ -29,14 +29,12 @@ public class TourDto {
     private int adultCapacity;
     private int childCapacity;
     private boolean isSpecial;
-//   private Set<OrderDto> orders =new HashSet<>();
-/*
-   private Hotel hotel;
-    private Airport airportFrom;
-    private Airport airportTo;
-    private City cityFrom;
-    private City cityTo;
-*/
+   private Set<OrderDto> orders =new HashSet<>();
+ //  private HotelDto hotel;
+ //   private AirportDto airportFrom;
+ //   private AirportDto airportTo;
+ //   private CityDto cityFrom;
+ //   private CityDto cityTo;
 
 
 }

@@ -49,8 +49,8 @@ public class Tour {
     @Column(name="is_special")
     private boolean isSpecial;
 
-/*    @OneToMany( mappedBy = "tour")
-    private Set<Order> orders =new HashSet<>();*/
+    @OneToMany( mappedBy = "tour")
+    private Set<Order> orders =new HashSet<>();
 
     @ManyToOne
     private Hotel hotel;

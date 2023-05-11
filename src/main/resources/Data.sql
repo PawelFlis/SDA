@@ -62,6 +62,22 @@ INSERT INTO hotel (name, city_id, standard) SELECT 'Hotel ' || name || ' standar
 INSERT INTO hotel (name, city_id, standard) SELECT 'Hotel ' || name || ' standard 4', id, 4 FROM city;
 INSERT INTO hotel (name, city_id, standard) SELECT 'Hotel ' || name || ' standard 5', id, 5 FROM city;
 
+/*INSERT INTO tour (adult_capacity
+                 , adult_cost
+                 , child_capacity
+                 , child_cost
+                 , date_from
+                 , date_to
+                 , days
+                 , is_special
+                 , type
+                 , airport_from_id
+                 , airport_to_id
+                 , city_from_id
+                 , city_to_id
+                 , hotel_id)
+VALUES  ( 30 ,1000,5,100,current_date,current_date,1,0,'AI',1,2,1,2,1)*/
+
 
 INSERT INTO tour (adult_capacity
 , adult_cost

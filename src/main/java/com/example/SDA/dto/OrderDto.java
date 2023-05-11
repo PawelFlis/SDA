@@ -20,7 +20,7 @@ public class OrderDto {
     private Long id;
     private int adultsCount;
     private int childrenCount;
-    private Tour tour;
-    private Set<Client> clients ;
+    private TourDto tour;
+    private Set<ClientDto> clients ;
 
 }
