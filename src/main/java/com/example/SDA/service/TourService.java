@@ -24,4 +24,5 @@ public class TourService {
         return mapToursToDto(tourRepository.findAll().stream().collect(Collectors.toSet())).stream().toList();
     }
 
+
 }
