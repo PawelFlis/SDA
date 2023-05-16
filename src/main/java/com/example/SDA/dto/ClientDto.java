@@ -1,11 +1,8 @@
 package com.example.SDA.dto;
 
-import com.example.SDA.model.Order;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -19,6 +16,5 @@ public class ClientDto {
     private LocalDate birthday;
     private String email;
     private String phone;
-    private Set<OrderDto> orders = new HashSet<>();
 
 }
