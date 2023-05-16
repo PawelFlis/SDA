@@ -1,8 +1,6 @@
 package com.example.SDA.dto;
 
 import com.example.SDA.model.Continent;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -16,7 +14,6 @@ public class ContinentMapper {
         return ContinentDto.builder()
                 .id(continent.getId())
                 .name(continent.getName())
-                .countries(CountryMapper.mapCountriesToDto(continent.getCountries()))
                 .build();
     }
 
