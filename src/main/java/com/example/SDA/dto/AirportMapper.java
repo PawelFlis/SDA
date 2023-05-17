@@ -1,6 +1,7 @@
 package com.example.SDA.dto;
 
 import com.example.SDA.model.Airport;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -14,10 +15,13 @@ public class AirportMapper {
         return AirportDto.builder()
                 .id(airport.getId())
                 .name(airport.getName())
+                .city(airport.getCity().getName())
                 .build();
     }
 
     public static Set<AirportDto> mapAirportsToDto(Set<Airport> airports) {
         return airports.stream().map(AirportMapper::mapAirportToDto).collect(Collectors.toSet());
     }
+
+
 }
