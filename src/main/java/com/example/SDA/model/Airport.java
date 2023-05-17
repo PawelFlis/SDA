@@ -25,9 +25,9 @@ public class Airport {
     @ManyToOne
     private City city;
 
-    @OneToMany(mappedBy = "airportFrom")
+    @OneToMany(mappedBy = "airportFrom",orphanRemoval = true)
     private Set<Tour> toursFrom = new HashSet<>();
 
-    @OneToMany(mappedBy = "airportTo")
+    @OneToMany(mappedBy = "airportTo",orphanRemoval = true)
     private Set<Tour> toursTo = new HashSet<>();
 }
