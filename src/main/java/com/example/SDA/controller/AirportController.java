@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.example.SDA.dto.AirportMapper.mapAirportToDto;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/airports")
@@ -26,13 +28,18 @@ public class AirportController {
         return airport;
     }
 
-    @DeleteMapping("/remove/{id}")
-    public void deleteAirport(@PathVariable("id") Long id) {
+    @DeleteMapping("/remove")
+    public void deleteAirport(@RequestParam Long id) {
         airportService.removeAirport(id);
     }
 
     @GetMapping("/update/{id}")
     public AirportDto updateAirport(@PathVariable("id") Long id,@RequestParam String newName) {
         return airportService.updateAirport(id,newName);
+    }
+
+    @GetMapping("/airport")
+    public AirportDto getAirport(@RequestParam Long id) {
+        return mapAirportToDto(airportService.getAirportById(id));
     }
 }
