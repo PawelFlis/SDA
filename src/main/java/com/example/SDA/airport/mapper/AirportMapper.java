@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class AirportMapper {
 
     private final CityMapper cityMapper;
+
     public AirportDto mapToDto(Airport airport) {
         return AirportDto.builder()
                 .id(airport.getId())

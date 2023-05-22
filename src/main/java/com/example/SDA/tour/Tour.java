@@ -5,11 +5,9 @@ import com.example.SDA.city.City;
 import com.example.SDA.hotel.Hotel;
 import com.example.SDA.hotel.enums.TourType;
 import com.example.SDA.order.Order;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,6 +19,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +52,8 @@ public class Tour {
     @Column(name="is_special")
     private boolean isSpecial;
 
-    @OneToMany( mappedBy = "tour")
+    @OneToMany( mappedBy = "tour",orphanRemoval = true)
+    @Nullable
     private Set<Order> orders =new HashSet<>();
 
     @ManyToOne

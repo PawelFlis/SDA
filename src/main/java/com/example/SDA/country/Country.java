@@ -24,6 +24,6 @@ public class Country {
     @ManyToOne
     private Continent continent;
 
-    @OneToMany( mappedBy = "country")
+    @OneToMany( mappedBy = "country",orphanRemoval = true)
     private Set<City> cites = new HashSet<>();
 }

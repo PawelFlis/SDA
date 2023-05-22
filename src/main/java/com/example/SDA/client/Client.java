@@ -37,10 +37,7 @@ public class Client {
 
     private String phone;
 
-    @ManyToMany
-    @JoinTable(name="client_order",
-    joinColumns = @JoinColumn(name="client_id"),
-    inverseJoinColumns = @JoinColumn(name="order_id"))
+    @OneToMany(mappedBy = "client", orphanRemoval = true)
     private Set<Order> orders = new HashSet<>();
 
     public Client(String firstName, String lastName, LocalDate birthday, String email, String phone) {

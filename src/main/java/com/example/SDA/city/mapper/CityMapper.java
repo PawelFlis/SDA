@@ -19,7 +19,10 @@ public class CityMapper {
     private final HotelMapper hotelMapper;
     private final TourMapper tourMapper;
 
-    public CityMapper(@Lazy CountryMapper countryMapper,@Lazy AirportMapper airportMapper,@Lazy  HotelMapper hotelMapper,@Lazy  TourMapper tourMapper) {
+    public CityMapper(@Lazy CountryMapper countryMapper
+            ,@Lazy AirportMapper airportMapper
+            , HotelMapper hotelMapper
+            , TourMapper tourMapper) {
         this.countryMapper = countryMapper;
         this.airportMapper = airportMapper;
         this.hotelMapper = hotelMapper;

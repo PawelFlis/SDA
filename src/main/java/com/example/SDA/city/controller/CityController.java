@@ -21,9 +21,8 @@ public class CityController {
     }
 
     @PostMapping("/add")
-    public City addCity(City city){
-        cityService.addCity(city);
-        return city;
+    public CityDto addCity(@RequestParam String cityName, @RequestParam Long countryId){
+        return cityService.addCity(cityName, countryId);
     }
 
     @DeleteMapping("/remove")
@@ -31,13 +30,13 @@ public class CityController {
         cityService.removeCity(id);
     }
 
-    @GetMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public CityDto updateCity(@PathVariable("id") Long id,@RequestParam String newName) {
         return cityService.updateCity(id,newName);
     }
 
-    @GetMapping("/city")
-    public CityDto getCity(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public CityDto getCity(@PathVariable Long id) {
         return cityService.getCityById(id);
     }
 }

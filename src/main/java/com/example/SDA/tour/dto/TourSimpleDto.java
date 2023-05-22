@@ -1,5 +1,7 @@
 package com.example.SDA.tour.dto;
 
+import com.example.SDA.city.dto.CitySimpleDto;
+import com.example.SDA.hotel.dto.HotelSimpleDto;
 import com.example.SDA.hotel.enums.TourType;
 import lombok.*;
 
@@ -22,4 +24,6 @@ public class TourSimpleDto {
     private int adultCapacity;
     private int childCapacity;
     private boolean isSpecial;
+    private HotelSimpleDto hotel;
+    private CitySimpleDto cityTo;
 }

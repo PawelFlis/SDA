@@ -1,10 +1,15 @@
 package com.example.SDA.tour.dto;
 
+import com.example.SDA.airport.dto.AirportSimpleDto;
+import com.example.SDA.city.dto.CitySimpleDto;
+import com.example.SDA.hotel.dto.HotelSimpleDto;
 import com.example.SDA.hotel.enums.TourType;
+import com.example.SDA.order.dto.OrderSimpleDto;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +27,13 @@ public class TourDto {
     private int adultCapacity;
     private int childCapacity;
     private boolean isSpecial;
+    private List<OrderSimpleDto> orders;
+    private HotelSimpleDto hotel;
+    private AirportSimpleDto airportFrom;
+    private AirportSimpleDto airportTo;
+    private CitySimpleDto cityFrom;
+    private CitySimpleDto cityTo;
+
 
 
 }

@@ -26,16 +26,16 @@ public class City {
     @ManyToOne
     private Country country;
 
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city",orphanRemoval = true)
     private Set<Airport> airports = new HashSet<>();
 
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city",orphanRemoval = true)
     private Set<Hotel> hotels = new HashSet<>();
 
-    @OneToMany(mappedBy = "cityFrom")
+    @OneToMany(mappedBy = "cityFrom",orphanRemoval = true)
     private  Set<Tour> toursFrom = new HashSet<>();
 
-    @OneToMany(mappedBy = "cityTo")
+    @OneToMany(mappedBy = "cityTo",orphanRemoval = true)
     private  Set<Tour> toursTo = new HashSet<>();
 
 }

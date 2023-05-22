@@ -3,7 +3,9 @@ package com.example.SDA.order;
 import com.example.SDA.client.Client;
 import com.example.SDA.tour.Tour;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -12,6 +14,8 @@ import java.util.Set;
 @Entity(name="Orders")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
 
     @Id
@@ -27,6 +31,6 @@ public class Order {
     @ManyToOne
     private Tour tour;
 
-    @ManyToMany(mappedBy = "orders")
-    private Set<Client> clients = new HashSet<>();
+    @ManyToOne
+    private Client client;
 }

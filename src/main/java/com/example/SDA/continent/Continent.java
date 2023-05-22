@@ -20,6 +20,6 @@ public class Continent {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany( mappedBy = "continent") //cascade = CascadeType.ALL,
+    @OneToMany( mappedBy = "continent",orphanRemoval = true)
     private Set<Country> countries = new HashSet<>();
 }

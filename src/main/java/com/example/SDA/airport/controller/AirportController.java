@@ -20,9 +20,8 @@ public class AirportController {
     }
 
     @PostMapping("/add")
-    public Airport addAirport(Airport airport){
-        airportService.addAirport(airport);
-        return airport;
+    public AirportDto addAirport( @RequestParam String airportName, @RequestParam Long cityId){
+        return airportService.addAirport(airportName, cityId);
     }
 
     @DeleteMapping("/remove/{id}")

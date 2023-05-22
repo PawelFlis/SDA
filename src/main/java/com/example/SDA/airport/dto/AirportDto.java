@@ -1,5 +1,6 @@
 package com.example.SDA.airport.dto;
 
+import com.example.SDA.city.dto.CityDto;
 import com.example.SDA.city.dto.CitySimpleDto;
 import lombok.*;
 

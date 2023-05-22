@@ -25,7 +25,7 @@ public class OrderMapper {
                 .adultsCount(order.getAdultsCount())
                 .childrenCount(order.getChildrenCount())
                 .tour(tourMapper.mapToSimpleDto(order.getTour()))
-                .clients(order.getClients().stream().map(clientMapper::mapToSimpleDto).toList())
+                .client(clientMapper.mapToSimpleDto(order.getClient()))
                 .build();
     }
 
@@ -34,8 +34,8 @@ public class OrderMapper {
                 .id(order.getId())
                 .adultsCount(order.getAdultsCount())
                 .childrenCount(order.getChildrenCount())
-/*                .tour(tourMapper.mapToSimpleDto(order.getTour()))
-                .clients(clientMapper.mapToSimpleDto(order.getClients()))*/
+                .tour(tourMapper.mapToSimpleDto(order.getTour()))
+                .client(clientMapper.mapToSimpleDto(order.getClient()))
                 .build();
     }
 

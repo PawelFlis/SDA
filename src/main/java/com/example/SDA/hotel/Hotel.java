@@ -3,7 +3,9 @@ package com.example.SDA.hotel;
 import com.example.SDA.city.City;
 import com.example.SDA.tour.Tour;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -12,6 +14,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Hotel {
 
     @Id
@@ -29,8 +33,12 @@ public class Hotel {
     @ManyToOne
     private City city;
 
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany(mappedBy = "hotel",orphanRemoval = true)
     private Set<Tour> tours = new HashSet<>();
 
-
+    public Hotel(String name, int standard, String note) {
+        this.name = name;
+        this.standard = standard;
+        this.note = note;
+    }
 }

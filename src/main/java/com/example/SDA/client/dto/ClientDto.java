@@ -1,5 +1,6 @@
 package com.example.SDA.client.dto;
 
+import com.example.SDA.order.dto.OrderSimpleDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -17,6 +18,6 @@ public class ClientDto {
     private LocalDate birthday;
     private String email;
     private String phone;
-    private List<Long> orders;
+    private List<OrderSimpleDto> orders;
 
 }

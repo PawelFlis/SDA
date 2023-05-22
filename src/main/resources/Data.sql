@@ -125,3 +125,11 @@ INSERT INTO client (first_name, last_name, phone, email, birthday) VALUES ('Ewa'
 INSERT INTO client (first_name, last_name, phone, email, birthday) VALUES ('Waldek', 'Kowalski', '505-605-705','waldzio@gmail.com', '1985-01-25');
 INSERT INTO client (first_name, last_name, phone, email, birthday) VALUES ('Ania', 'Nowak', '375-433-452','kwiatek@gmail.com', '1999-07-01');
 INSERT INTO client (first_name, last_name, phone, email, birthday) VALUES ('Jan', 'Nowak', '501-601-701','JanekNowak@gmail.com', '1980-12-12');
+
+INSERT INTO orders(adults_count, children_count, tour_id, client_id) VALUES(2, 1, 1, 1);
+INSERT INTO orders(adults_count, children_count, tour_id, client_id) VALUES(2, 1, 1, 2);
+INSERT INTO orders(adults_count, children_count, tour_id, client_id) VALUES(2, 4, 1, 3);
+INSERT INTO orders(adults_count, children_count, tour_id, client_id) VALUES(2, 0, 1, 4 );
+INSERT INTO orders(adults_count, children_count, tour_id, client_id) VALUES(4, 2, 1, 5 );
+
+

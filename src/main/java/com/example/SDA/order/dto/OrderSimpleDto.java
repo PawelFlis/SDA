@@ -16,6 +16,6 @@ public class OrderSimpleDto {
     private Long id;
     private int adultsCount;
     private int childrenCount;
- /*   private TourSimpleDto tour;
-    private List<ClientSimpleDto> clients ;*/
+    private TourSimpleDto tour;
+    private ClientSimpleDto client ;
 }

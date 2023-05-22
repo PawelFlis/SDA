@@ -5,6 +5,9 @@ import com.example.SDA.client.dto.ClientDto;
 import com.example.SDA.client.dto.ClientRequestDto;
 import com.example.SDA.client.dto.ClientSimpleDto;
 import com.example.SDA.order.Order;
+import com.example.SDA.order.mapper.OrderMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -12,6 +15,11 @@ import java.util.stream.Collectors;
 
 @Component
 public class ClientMapper {
+    private final OrderMapper orderMapper;
+
+    public ClientMapper(@Lazy OrderMapper orderMapper) {
+        this.orderMapper = orderMapper;
+    }
 
     public ClientDto mapToDto(Client client) {
         return ClientDto.builder()
@@ -21,7 +29,7 @@ public class ClientMapper {
                 .birthday(client.getBirthday())
                 .email(client.getEmail())
                 .phone(client.getPhone())
-                .orders(client.getOrders().stream().map(Order::getId).toList())
+                .orders(client.getOrders().stream().map(orderMapper::mapToSimpleDto).toList())
                 .build();
     }
 
