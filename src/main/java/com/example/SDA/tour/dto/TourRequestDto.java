@@ -1,15 +1,10 @@
 package com.example.SDA.tour.dto;
 
-import com.example.SDA.airport.dto.AirportSimpleDto;
-import com.example.SDA.city.dto.CitySimpleDto;
-import com.example.SDA.hotel.dto.HotelSimpleDto;
-import com.example.SDA.hotel.enums.TourType;
-import com.example.SDA.order.dto.OrderSimpleDto;
+import com.example.SDA.tour.enums.TourType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 public record TourRequestDto(
         @JsonFormat(pattern="yyyy-MM-dd") LocalDate dateFrom,

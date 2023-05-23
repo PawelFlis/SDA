@@ -16,6 +16,7 @@ import com.example.SDA.tour.Tour;
 import com.example.SDA.tour.dto.TourDto;
 import com.example.SDA.tour.dto.TourRequestDto;
 import com.example.SDA.tour.dto.TourSimpleDto;
+import com.example.SDA.tour.enums.TourType;
 import com.example.SDA.tour.exception.TourNotFoundException;
 import com.example.SDA.tour.mapper.TourMapper;
 import com.example.SDA.tour.repository.TourRepository;
@@ -78,6 +79,43 @@ public class TourService {
     public TourDto update(TourRequestDto tourRequest, Long tourId){
         Tour tour = tourRepository.findById(tourId).orElseThrow(()->new TourNotFoundException(tourId));
 
+        Hotel hotel = hotelRepository.findById(tourRequest.hotelId()).orElseThrow(()->new HotelNotFoundException(tourRequest.hotelId()));
+        Airport airportFrom = airportRepository.findById(tourRequest.airportFromId()).orElseThrow(()->new AirportNotFoundException(tourRequest.airportFromId()));
+        Airport airportTo = airportRepository.findById(tourRequest.airportToId()).orElseThrow(()->new AirportNotFoundException(tourRequest.airportToId()));
+        City cityFrom = cityRepository.findById(tourRequest.cityFromId()).orElseThrow(()->new CityNotFoundException(tourRequest.cityFromId()));
+        City cityTo = cityRepository.findById(tourRequest.cityToId()).orElseThrow(()->new CityNotFoundException(tourRequest.cityToId()));
+
+        tour.setDateFrom(tourRequest.dateFrom());
+                tour.setDateTo(tourRequest.dateTo());
+                tour.setDays(tourRequest.days());
+                tour.setType(tourRequest.type());
+                tour.setAdultCost(tourRequest.adultCost());
+                tour.setChildCost(tourRequest.childCost());
+                tour.setAdultCapacity(tourRequest.adultCapacity());
+                tour.setChildCapacity(tourRequest.childCapacity());
+                tour.setSpecial(tourRequest.isSpecial());
+                tour.setHotel(hotel);
+                tour.setAirportFrom(airportFrom);
+                tour.setAirportTo(airportTo);
+                tour.setCityFrom(cityFrom);
+                tour.setCityTo(cityTo);
+
         return tourMapper.mapToDto(tour);
+    }
+
+    public List<TourDto> findPromotedTours(){
+        return tourRepository.findPromotedTours().stream().map(tourMapper::mapToDto).toList();
+    }
+
+    public List<TourDto> findToursByType(TourType type){
+        return tourRepository.findToursByType(type).stream().map(tourMapper::mapToDto).toList();
+    }
+
+    public List<TourDto> findToursLastMinute(){
+        return tourRepository.findToursLastMinute().stream().map(tourMapper::mapToDto).toList();
+    }
+
+    public List<TourDto> findToursLastMinuteByType(TourType type){
+        return tourRepository.findToursLastMinuteByType(type.toString()).stream().map(tourMapper::mapToDto).toList();
     }
 }

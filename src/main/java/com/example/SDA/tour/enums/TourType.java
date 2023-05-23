@@ -1,4 +1,4 @@
-package com.example.SDA.hotel.enums;
+package com.example.SDA.tour.enums;
 
 public enum TourType {
 

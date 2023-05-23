@@ -3,7 +3,7 @@ package com.example.SDA.tour;
 import com.example.SDA.airport.Airport;
 import com.example.SDA.city.City;
 import com.example.SDA.hotel.Hotel;
-import com.example.SDA.hotel.enums.TourType;
+import com.example.SDA.tour.enums.TourType;
 import com.example.SDA.order.Order;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;

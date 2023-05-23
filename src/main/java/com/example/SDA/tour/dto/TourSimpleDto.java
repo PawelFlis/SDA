@@ -2,7 +2,7 @@ package com.example.SDA.tour.dto;
 
 import com.example.SDA.city.dto.CitySimpleDto;
 import com.example.SDA.hotel.dto.HotelSimpleDto;
-import com.example.SDA.hotel.enums.TourType;
+import com.example.SDA.tour.enums.TourType;
 import lombok.*;
 
 import java.math.BigDecimal;

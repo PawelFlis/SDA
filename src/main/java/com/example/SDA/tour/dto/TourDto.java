@@ -3,7 +3,7 @@ package com.example.SDA.tour.dto;
 import com.example.SDA.airport.dto.AirportSimpleDto;
 import com.example.SDA.city.dto.CitySimpleDto;
 import com.example.SDA.hotel.dto.HotelSimpleDto;
-import com.example.SDA.hotel.enums.TourType;
+import com.example.SDA.tour.enums.TourType;
 import com.example.SDA.order.dto.OrderSimpleDto;
 import lombok.*;
 
