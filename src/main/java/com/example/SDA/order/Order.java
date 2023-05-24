@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Min;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Min(1)
     @Column(name = "adults_count",nullable = false)
     private int adultsCount;
 
