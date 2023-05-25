@@ -8,6 +8,7 @@ import com.example.SDA.continent.dto.ContinentDto;
 import com.example.SDA.continent.exception.ContinentNotFoundException;
 import com.example.SDA.continent.mapper.ContinentMapper;
 import com.example.SDA.continent.repository.ContinentRepository;
+import com.example.SDA.country.mapper.CountryMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,7 +27,8 @@ import static org.mockito.Mockito.when;
 class ContinentServiceTest {
     private ContinentRepository repository = Mockito.mock(ContinentRepository.class);
     private ContinentMapper mapper=Mockito.mock(ContinentMapper.class);
-    private ContinentService service= new ContinentService(repository,mapper);
+    private CountryMapper countryMapper = Mockito.mock(CountryMapper.class);
+    private ContinentService service= new ContinentService(repository,mapper,countryMapper);
 
     @Test
     void shouldCorrectlyReturnContinentByGivenId(){

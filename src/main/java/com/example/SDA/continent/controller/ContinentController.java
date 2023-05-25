@@ -2,6 +2,7 @@ package com.example.SDA.continent.controller;
 
 import com.example.SDA.continent.dto.ContinentDto;
 import com.example.SDA.continent.service.ContinentService;
+import com.example.SDA.country.dto.CountryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +27,10 @@ public class ContinentController {
     @GetMapping("/{id}")
     public ContinentDto getContinentById(@PathVariable("id") Long continentId){
         return continentService.getById(continentId);
+    }
+
+    @GetMapping("/{continentName}/countries")
+    public List<CountryDto> getCountriesByContinent (@PathVariable String continentName) {
+        return continentService.findCountriesByContinent(continentName);
     }
 }

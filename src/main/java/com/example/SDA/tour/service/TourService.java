@@ -17,6 +17,7 @@ import com.example.SDA.tour.dto.TourDto;
 import com.example.SDA.tour.dto.TourRequestDto;
 import com.example.SDA.tour.dto.TourSimpleDto;
 import com.example.SDA.tour.enums.TourType;
+import com.example.SDA.tour.exception.InvalidTourDateException;
 import com.example.SDA.tour.exception.TourNotFoundException;
 import com.example.SDA.tour.mapper.TourMapper;
 import com.example.SDA.tour.repository.TourRepository;
@@ -24,6 +25,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
@@ -50,6 +52,12 @@ public class TourService {
 
     @Transactional
     public TourSimpleDto add(TourRequestDto tourRequest) {
+        if (tourRequest.dateTo().isBefore(tourRequest.dateFrom())
+                || tourRequest.dateTo().minusDays(14).isAfter(tourRequest.dateFrom())) {
+            throw new InvalidTourDateException();
+        }
+
+
         Hotel hotel = hotelRepository.findById(tourRequest.hotelId()).orElseThrow(()->new HotelNotFoundException(tourRequest.hotelId()));
         Airport airportFrom = airportRepository.findById(tourRequest.airportFromId()).orElseThrow(()->new AirportNotFoundException(tourRequest.airportFromId()));
         Airport airportTo = airportRepository.findById(tourRequest.airportToId()).orElseThrow(()->new AirportNotFoundException(tourRequest.airportToId()));
@@ -58,7 +66,7 @@ public class TourService {
         Tour tour = Tour.builder()
                 .dateFrom(tourRequest.dateFrom())
                 .dateTo(tourRequest.dateTo())
-                .days(tourRequest.days())
+                .days((int) ChronoUnit.DAYS.between( tourRequest.dateFrom(),tourRequest.dateTo()))
                 .type(tourRequest.type())
                 .adultCost(tourRequest.adultCost())
                 .childCost(tourRequest.childCost())
@@ -87,7 +95,7 @@ public class TourService {
 
         tour.setDateFrom(tourRequest.dateFrom());
                 tour.setDateTo(tourRequest.dateTo());
-                tour.setDays(tourRequest.days());
+                tour.setDays((int) ChronoUnit.DAYS.between( tourRequest.dateFrom(),tourRequest.dateTo()));
                 tour.setType(tourRequest.type());
                 tour.setAdultCost(tourRequest.adultCost());
                 tour.setChildCost(tourRequest.childCost());
@@ -117,5 +125,11 @@ public class TourService {
 
     public List<TourDto> findToursLastMinuteByType(TourType type){
         return tourRepository.findToursLastMinuteByType(type.toString()).stream().map(tourMapper::mapToDto).toList();
+    }
+
+    public void deactiveExpiredTours(){
+        //tourRepository.clearExpiredTours();
+        List<Tour> tours = tourRepository.clearExpiredTours();
+        tourRepository.deleteAll(tours);
     }
 }
