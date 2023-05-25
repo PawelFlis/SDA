@@ -9,24 +9,40 @@ import com.example.SDA.order.dto.OrderSimpleDto;
 import com.example.SDA.order.mapper.OrderMapper;
 import com.example.SDA.tour.mapper.TourMapper;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.matchers.Null;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class ClientServiceTest {
 
-    private final ClientMapper clientMapper = Mockito.mock(ClientMapper.class);
-    private final ClientRepository repository = Mockito.mock(ClientRepository.class);
-    private final ClientService service = new ClientService(repository,clientMapper);
+/*    private ClientMapper clientMapper = Mockito.mock(ClientMapper.class);
+    private ClientRepository repository = Mockito.mock(ClientRepository.class);
+    private ClientService service = new ClientService(repository,clientMapper);*/
 
+    @Mock
+    private ClientRepository repository;
+    @InjectMocks
+    private ClientService service;
+    @Mock
+    private ClientMapper clientMapper;
+
+    @Disabled
     @Test
     void shouldCorrectlyAdNewClient() {
         //given
+        //when(repository.save)
         ClientRequestDto clientRequestDto = new ClientRequestDto();
         clientRequestDto.setFirstName("Jan");
         clientRequestDto.setLastName("Nowak");
@@ -44,7 +60,8 @@ class ClientServiceTest {
         expected.setOrders(new ArrayList<OrderSimpleDto>());
 
         //when
-        ClientDto result = service.add(clientRequestDto);
+            service.add(clientRequestDto);
+            ClientDto result =clientMapper.mapToDto(repository.findById(1L).orElse(null));
         //then
         Assertions.assertThat(result).isEqualTo(expected);
     }

@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +27,8 @@ public class Hotel {
     @Column(nullable = false)
     private String name;
 
+    @Min(1)
+    @Max(5)
     private int standard;
 
     @Column(columnDefinition = "text")

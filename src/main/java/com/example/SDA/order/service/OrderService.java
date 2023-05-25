@@ -10,6 +10,9 @@ import com.example.SDA.order.exception.OrderNotFoundException;
 import com.example.SDA.order.mapper.OrderMapper;
 import com.example.SDA.order.repository.OrderRepository;
 import com.example.SDA.tour.Tour;
+import com.example.SDA.tour.dto.TourRequestDto;
+import com.example.SDA.tour.exception.FullAdultCapacityException;
+import com.example.SDA.tour.exception.FullChildCapacityException;
 import com.example.SDA.tour.exception.TourNotFoundException;
 import com.example.SDA.tour.repository.TourRepository;
 import jakarta.transaction.Transactional;
@@ -29,33 +32,40 @@ public class OrderService {
     private final TourRepository tourRepository;
 
 
-    public List<OrderDto> getAll(){
+    public List<OrderDto> getAll() {
         return orderRepository.findAll().stream().map(orderMapper::mapToDto).toList();
     }
 
-    public OrderDto getById(Long id){
-        return orderMapper.mapToDto(orderRepository.findById(id).orElseThrow(()->new OrderNotFoundException(id)));
+    public OrderDto getById(Long id) {
+        return orderMapper.mapToDto(orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id)));
     }
 
     @Transactional
-    public OrderDto add(OrderRequestDto orderRequest){
-        Client client=clientRepository.findById(orderRequest.clientId()).orElseThrow(()->new ClientNotFoundException(orderRequest.clientId()));
-        Tour tour=tourRepository.findById(orderRequest.tourId()).orElseThrow(()->new TourNotFoundException(orderRequest.tourId()));
+    public OrderDto add(OrderRequestDto orderRequest) {
+        Tour tour = tourRepository.findById(orderRequest.tourId()).orElseThrow(() -> new TourNotFoundException(orderRequest.tourId()));
+
+        Client client = clientRepository.findById(orderRequest.clientId()).orElseThrow(() -> new ClientNotFoundException(orderRequest.clientId()));
+        tour.setAdultCapacity(tour.getAdultCapacity() - orderRequest.adultsCount());
+        tour.setChildCapacity(tour.getChildCapacity() - orderRequest.childrenCount());
         Order order = new Order();
         order.setClient(client);
-        order.setTour(tour);
+        if (checkAdultCapacity(tour, orderRequest) && checkChildCapacity(tour, orderRequest)) {
+            order.setTour(tour);
+        }
         order.setAdultsCount(orderRequest.adultsCount());
         order.setChildrenCount(orderRequest.childrenCount());
+
         orderRepository.save(order);
         tour.getOrders().add(order);
         return orderMapper.mapToDto(order);
+
     }
 
     @Transactional
-    public OrderDto update(OrderRequestDto orderRequest, Long orderId){
-        Client client=clientRepository.findById(orderRequest.clientId()).orElseThrow(()->new ClientNotFoundException(orderRequest.clientId()));
-        Tour tour=tourRepository.findById(orderRequest.tourId()).orElseThrow(()->new TourNotFoundException(orderRequest.tourId()));
-        Order order = orderRepository.findById(orderId).orElseThrow(()->new OrderNotFoundException(orderId));
+    public OrderDto update(OrderRequestDto orderRequest, Long orderId) {
+        Client client = clientRepository.findById(orderRequest.clientId()).orElseThrow(() -> new ClientNotFoundException(orderRequest.clientId()));
+        Tour tour = tourRepository.findById(orderRequest.tourId()).orElseThrow(() -> new TourNotFoundException(orderRequest.tourId()));
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new OrderNotFoundException(orderId));
         order.setClient(client);
         order.setTour(tour);
         order.setAdultsCount(orderRequest.adultsCount());
@@ -63,7 +73,21 @@ public class OrderService {
         return orderMapper.mapToDto(order);
     }
 
-    public void remove(Long id){
+    public void remove(Long id) {
         orderRepository.deleteById(id);
+    }
+
+    private boolean checkAdultCapacity(Tour tour, OrderRequestDto orderRequestDto) {
+        if (!(tour.getAdultCapacity() - orderRequestDto.adultsCount() >= 0)) {
+            throw new FullAdultCapacityException();
+        }
+        return true;
+    }
+
+    private boolean checkChildCapacity(Tour tour, OrderRequestDto orderRequestDto) {
+        if (!(tour.getChildCapacity() - orderRequestDto.childrenCount() >= 0)) {
+            throw new FullChildCapacityException();
+        }
+        return true;
     }
 }

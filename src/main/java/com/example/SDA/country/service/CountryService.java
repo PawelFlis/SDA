@@ -47,6 +47,7 @@ public class CountryService {
     }
 
     public void removeById(Long id) {
-        countryRepository.deleteById(id);
+        Country country = countryRepository.findById(id).orElseThrow(() -> new CountryNotFoundException(id));
+        countryRepository.delete(country);
     }
 }
