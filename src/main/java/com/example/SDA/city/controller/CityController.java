@@ -1,8 +1,10 @@
 package com.example.SDA.city.controller;
 
+import com.example.SDA.airport.dto.AirportDto;
 import com.example.SDA.city.dto.CityDto;
 import com.example.SDA.city.City;
 import com.example.SDA.city.service.CityService;
+import com.example.SDA.hotel.dto.HotelDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,5 +40,15 @@ public class CityController {
     @GetMapping("/{id}")
     public CityDto getCity(@PathVariable Long id) {
         return cityService.getCityById(id);
+    }
+
+    @GetMapping("/{cityName}/airports")
+    public List<AirportDto> getCityAirports(@PathVariable String cityName){
+        return cityService.getAllCityAirports(cityName);
+    }
+
+    @GetMapping("/{cityName}/{raiting}")
+    public List<HotelDto> findHotelsByRatingInCity(@PathVariable String cityName, @PathVariable int raiting){
+        return cityService.findHotelsByRatingInCity(cityName, raiting);
     }
 }

@@ -97,7 +97,7 @@ SELECT 30 as adult_capacity
 ,  1000 * h.standard / 2  * case when cnf.id<>cnt.id then 2 when cuf.id<>cut.id then 1.5 else 1 end as adult_cost
 ,  10 as child_capacity
 ,  500 * h.standard / 2  * case when cnf.id<>cnt.id then 2 when cuf.id<>cut.id then 1.5 else 1 end as child_cost
-, cast(dateadd(day, cast(RAND()*200 as int), CURRENT_DATE()) as date) as date_from
+, cast(dateadd(day, cast(RAND()*200 - 10 as int), CURRENT_DATE()) as date) as date_from
 , CURRENT_DATE() as date_to
 , CASE WHEN RAND()<0.2 then 14 WHEN RAND()<0.8 then 7 else 3 END as days
 , CASE WHEN RAND()<0.05 then 1 else 0 END as is_special
